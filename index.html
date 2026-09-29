@@ -38,7 +38,7 @@
     display:flex;
     justify-content:center;
   }
-  .page{ width:100%; max-width:600px; padding:52px 22px 60px; }
+  .page{ width:100%; max-width:1040px; padding:52px 22px 60px; }
 
   /* ---------------- Masthead ---------------- */
   .masthead{ text-align:center; margin-bottom:36px; }
@@ -62,25 +62,18 @@
     margin:0 0 10px;
     color:var(--ink-900);
   }
-  .brand-rule{
-    width:64px;height:2px;
-    background:var(--gold-600);
-    margin:0 auto 12px;
-  }
+  .brand-rule{ width:64px;height:2px; background:var(--gold-600); margin:0 auto 12px; }
   .brand-tagline{
-    font-size:11.5px;
-    font-weight:500;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--ink-500);
-    margin:0;
+    font-size:11.5px; font-weight:500; letter-spacing:0.16em;
+    text-transform:uppercase; color:var(--ink-500); margin:0;
   }
 
   /* ---------------- Status strip ---------------- */
   .status-strip{
     display:flex;align-items:center;justify-content:center;gap:8px;
     padding:11px 14px;
-    margin-bottom:34px;
+    margin:0 auto 34px;
+    max-width:600px;
     border-top:1px solid var(--rule);
     border-bottom:1px solid var(--rule);
     font-family:'IBM Plex Mono', monospace;
@@ -100,122 +93,85 @@
     100%{ box-shadow:0 0 0 0 rgba(28,143,82,0); }
   }
 
-  /* ---------------- Rate ledger ---------------- */
-  .ledger-label{
-    display:flex;align-items:baseline;justify-content:space-between;
-    margin-bottom:14px;
-  }
-  .ledger-label h2{
-    margin:0;
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:16px;
-    color:var(--ink-900);
-  }
-  .ledger-label span{
-    font-size:10.5px;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color:var(--ink-500);
+  /* ---------------- Board: rates + chart ---------------- */
+  .board{ max-width:600px; margin:0 auto 44px; display:grid; gap:40px; }
+  @media (min-width:900px){
+    .board{
+      max-width:none;
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+      gap:56px;
+      align-items:start;
+    }
+    .chart-card{ position:sticky; top:24px; }
   }
 
+  .ledger-label{ display:flex;align-items:baseline;justify-content:space-between; margin-bottom:14px; }
+  .ledger-label h2{ margin:0; font-family:'Fraunces', serif; font-weight:600; font-size:16px; color:var(--ink-900); }
+  .ledger-label span{ font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-500); }
+
   .rates-head{
-    display:grid;
-    grid-template-columns:1.1fr 1fr 1fr;
-    padding:0 0 10px;
-    border-bottom:1.5px solid var(--rule-strong);
-    font-size:10.5px;
-    font-weight:600;
-    letter-spacing:0.07em;
-    text-transform:uppercase;
-    color:var(--ink-500);
+    display:grid; grid-template-columns:1.1fr 1fr 1fr;
+    padding:0 0 10px; border-bottom:1.5px solid var(--rule-strong);
+    font-size:10.5px; font-weight:600; letter-spacing:0.07em;
+    text-transform:uppercase; color:var(--ink-500);
   }
   .rates-head .col-r{ text-align:right; }
 
   .row{
-    display:grid;
-    grid-template-columns:1.1fr 1fr 1fr;
-    align-items:center;
-    padding:16px 0;
-    border-bottom:1px solid var(--rule);
+    display:grid; grid-template-columns:1.1fr 1fr 1fr; align-items:center;
+    padding:16px 0; border-bottom:1px solid var(--rule);
   }
-  .ccy-code{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:clamp(16px,4.4vw,19px);
-    color:var(--ink-900);
-    display:block;
-  }
-  .ccy-name{
-    display:block;
-    font-size:10.5px;
-    color:var(--ink-500);
-    margin-top:1px;
-  }
+  .ccy-code{ font-family:'Fraunces', serif; font-weight:600; font-size:clamp(16px,4.4vw,19px); color:var(--ink-900); display:block; }
+  .ccy-name{ display:block; font-size:10.5px; color:var(--ink-500); margin-top:1px; }
   .rate-cell{ text-align:right; }
   .rate-big{
-    font-family:'IBM Plex Mono', monospace;
-    font-variant-numeric:tabular-nums;
-    font-weight:600;
-    font-size:clamp(15px,4.4vw,18px);
-    color:var(--ink-900);
-    display:block;
-    transition:color 0.3s ease;
+    font-family:'IBM Plex Mono', monospace; font-variant-numeric:tabular-nums;
+    font-weight:600; font-size:clamp(15px,4.4vw,18px); color:var(--ink-900);
+    display:block; transition:color 0.3s ease;
   }
   .rate-big.flip{ color:var(--gold-700); }
-  .rate-range{
-    display:block;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:9.5px;
-    color:var(--ink-500);
-    margin-top:3px;
-  }
+  .rate-range{ display:block; font-family:'IBM Plex Mono', monospace; font-size:9.5px; color:var(--ink-500); margin-top:3px; }
 
-  .ledger-note{
-    font-size:11px;
-    color:var(--ink-500);
-    text-align:center;
-    margin:20px 0 44px;
-  }
+  .ledger-note{ font-size:11px; color:var(--ink-500); text-align:center; margin:20px 0 0; }
+
+  /* ---------------- Chart card ---------------- */
+  .chart-card{ background:var(--paper-tint); border:1px solid var(--rule); border-top:2px solid var(--gold-600); padding:22px 22px 20px; }
+  .legend{ display:flex; gap:16px; margin:0 0 18px; font-size:11px; font-weight:500; color:var(--ink-700); }
+  .legend span{ display:flex; align-items:center; gap:6px; }
+  .sw{ width:10px; height:10px; display:inline-block; border-radius:2px; }
+  .sw.buy, .fill.buy{ background:var(--ink-900); }
+  .sw.sell, .fill.sell{ background:var(--gold-600); }
+
+  .group{ padding:14px 0; border-bottom:1px solid var(--rule); }
+  .group:last-of-type{ border-bottom:none; }
+  .group-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:9px; }
+  .group-head strong{ font-family:'Fraunces', serif; font-size:15px; font-weight:600; }
+  .spread{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--ink-500); }
+  .bar-line{ display:grid; grid-template-columns:32px 1fr 52px; align-items:center; gap:8px; margin-top:6px; }
+  .bar-tag{ font-size:9.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-500); }
+  .track{ height:14px; background:#ece9e1; border-radius:2px; overflow:hidden; }
+  .fill{ height:100%; width:0; border-radius:2px; transition:width 0.7s cubic-bezier(.2,.7,.2,1); }
+  .bar-val{ font-family:'IBM Plex Mono', monospace; font-variant-numeric:tabular-nums; font-size:11.5px; font-weight:600; text-align:right; }
+  .chart-caption{ margin:14px 0 0; font-size:11px; line-height:1.55; color:var(--ink-500); }
 
   /* ---------------- Mobile stacked rows ---------------- */
   @media (max-width:420px){
     .rates-head{ display:none; }
     .row{ grid-template-columns:1fr; row-gap:10px; padding:18px 0; }
     .row-values{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-    .rate-cell{
-      text-align:left;
-      background:var(--paper-tint);
-      border-left:2px solid var(--gold-600);
-      padding:8px 10px;
-    }
-    .rate-label{
-      display:block;
-      font-size:9px;
-      font-weight:600;
-      letter-spacing:0.08em;
-      text-transform:uppercase;
-      color:var(--gold-700);
-      margin-bottom:3px;
-    }
+    .rate-cell{ text-align:left; background:var(--paper-tint); border-left:2px solid var(--gold-600); padding:8px 10px; }
+    .rate-label{ display:block; font-size:9px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-700); margin-bottom:3px; }
+    .chart-card{ padding:18px 16px; }
   }
   @media (min-width:421px){
     .rate-label{ display:none; }
     .row-values{ display:contents; }
   }
 
-  /* ---------------- Services ---------------- */
-  .services{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    border-top:1px solid var(--rule);
-    margin-bottom:34px;
-  }
-  .service{
-    padding:20px 18px;
-    border-right:1px solid var(--rule);
-    border-bottom:1px solid var(--rule);
-  }
+  /* ---------------- Lower sections ---------------- */
+  .lower{ max-width:600px; margin:0 auto; }
+  .services{ display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--rule); margin-bottom:34px; }
+  .service{ padding:20px 18px; border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); }
   .service:nth-child(2n){ border-right:none; }
   .service i{ color:var(--gold-600); font-size:15px; margin-bottom:10px; display:block; }
   .service h3{ margin:0 0 4px; font-size:12.5px; font-weight:600; color:var(--ink-900); }
@@ -225,56 +181,29 @@
     .service{ border-right:none; }
   }
 
-  /* ---------------- Compliance strip ---------------- */
   .compliance{
     display:flex;align-items:center;justify-content:center;gap:18px;
-    padding:12px 0;
-    margin-bottom:44px;
-    border-top:1px solid var(--rule);
-    border-bottom:1px solid var(--rule);
-    font-size:10px;
-    font-weight:600;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--gold-700);
+    padding:12px 0; margin-bottom:44px;
+    border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+    font-size:10px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-700);
   }
   .compliance span{ display:flex; align-items:center; gap:6px; }
   .compliance i{ font-size:10px; }
 
-  /* ---------------- Address ---------------- */
   .address-block{ text-align:center; }
-  .address-block .label{
-    font-size:10.5px;
-    font-weight:600;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--ink-500);
-    margin-bottom:10px;
-  }
-  .address-block address{
-    font-style:normal;
-    font-size:14.5px;
-    line-height:1.65;
-    color:var(--ink-900);
-    margin:0 0 20px;
-  }
+  .address-block .label{ font-size:10.5px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-500); margin-bottom:10px; }
+  .address-block address{ font-style:normal; font-size:14.5px; line-height:1.65; color:var(--ink-900); margin:0 0 20px; }
   .directions-btn{
-    display:inline-flex;align-items:center;gap:9px;
-    padding:12px 26px;
-    border-radius:3px;
-    background:var(--ink-900);
-    color:var(--paper);
-    text-decoration:none;
-    font-size:12.5px;
-    font-weight:600;
-    letter-spacing:0.02em;
-    transition:background 0.2s ease;
+    display:inline-flex;align-items:center;gap:9px; padding:12px 26px; border-radius:3px;
+    background:var(--ink-900); color:var(--paper); text-decoration:none;
+    font-size:12.5px; font-weight:600; letter-spacing:0.02em; transition:background 0.2s ease;
   }
   .directions-btn:hover{ background:var(--gold-700); }
   .directions-btn:focus-visible, a:focus-visible{ outline:2px solid var(--gold-600); outline-offset:3px; }
 
   @media (prefers-reduced-motion: reduce){
     .live-dot{ animation:none; }
+    .fill{ transition:none; }
   }
 </style>
 </head>
@@ -293,67 +222,90 @@
     <span id="clock">—</span>
   </div>
 
-  <div class="ledger-label">
-    <h2>Today's rates</h2>
-    <span>Naira per unit</span>
+  <div class="board">
+
+    <!-- Rates -->
+    <section class="ledger">
+      <div class="ledger-label">
+        <h2>Today's rates</h2>
+        <span>Naira per unit</span>
+      </div>
+
+      <div class="rates-head">
+        <span>Currency</span>
+        <span class="col-r">Buy rate</span>
+        <span class="col-r">Sell rate</span>
+      </div>
+
+      <div class="row" data-code="USD" data-buy-low="1371" data-buy-high="1375" data-sell-low="1380" data-sell-high="1385">
+        <div><span class="ccy-code">USD</span><span class="ccy-name">US Dollar</span></div>
+        <div class="row-values">
+          <div class="rate-cell"><span class="rate-label">Buy</span><span class="rate-big buy-val">1,371</span><span class="rate-range">1,371–1,375</span></div>
+          <div class="rate-cell"><span class="rate-label">Sell</span><span class="rate-big sell-val">1,380</span><span class="rate-range">1,380–1,385</span></div>
+        </div>
+      </div>
+
+      <div class="row" data-code="EUR" data-buy-low="1540" data-buy-high="1550" data-sell-low="1575" data-sell-high="1580">
+        <div><span class="ccy-code">EUR</span><span class="ccy-name">Euro</span></div>
+        <div class="row-values">
+          <div class="rate-cell"><span class="rate-label">Buy</span><span class="rate-big buy-val">1,540</span><span class="rate-range">1,540–1,550</span></div>
+          <div class="rate-cell"><span class="rate-label">Sell</span><span class="rate-big sell-val">1,575</span><span class="rate-range">1,575–1,580</span></div>
+        </div>
+      </div>
+
+      <div class="row" data-code="GBP" data-buy-low="1860" data-buy-high="1870" data-sell-low="1880" data-sell-high="1885">
+        <div><span class="ccy-code">GBP</span><span class="ccy-name">Pound Sterling</span></div>
+        <div class="row-values">
+          <div class="rate-cell"><span class="rate-label">Buy</span><span class="rate-big buy-val">1,860</span><span class="rate-range">1,860–1,870</span></div>
+          <div class="rate-cell"><span class="rate-label">Sell</span><span class="rate-big sell-val">1,880</span><span class="rate-range">1,880–1,885</span></div>
+        </div>
+      </div>
+
+      <p class="ledger-note">Rates are indicative and subject to change.</p>
+    </section>
+
+    <!-- Chart -->
+    <aside class="chart-card" aria-label="Bar chart comparing buy and sell rates for USD, EUR and GBP">
+      <div class="ledger-label">
+        <h2>Rate comparison</h2>
+        <span>Buy vs sell · ₦</span>
+      </div>
+      <div class="legend">
+        <span><i class="sw buy"></i>Buy rate</span>
+        <span><i class="sw sell"></i>Sell rate</span>
+      </div>
+      <div id="chart"></div>
+      <p class="chart-caption">Each bar shows what we pay (buy) and charge (sell) per unit of currency, in Naira. The spread is the gap between the two.</p>
+    </aside>
+
   </div>
 
-  <div class="rates-head">
-    <span>Currency</span>
-    <span class="col-r">Buy rate</span>
-    <span class="col-r">Sell rate</span>
-  </div>
-
-  <div class="row" data-buy-low="1371" data-buy-high="1375" data-sell-low="1380" data-sell-high="1385">
-    <div><span class="ccy-code">USD</span><span class="ccy-name">US Dollar</span></div>
-    <div class="row-values">
-      <div class="rate-cell"><span class="rate-label">Buy</span><span class="rate-big buy-val">1,371</span><span class="rate-range">1,371–1,375</span></div>
-      <div class="rate-cell"><span class="rate-label">Sell</span><span class="rate-big sell-val">1,380</span><span class="rate-range">1,380–1,385</span></div>
+  <div class="lower">
+    <div class="services">
+      <div class="service">
+        <i class="fa-solid fa-building-columns"></i>
+        <h3>Inflow transactions</h3>
+        <p>Cash deposits accepted at any local bank in Nigeria.</p>
+      </div>
+      <div class="service">
+        <i class="fa-solid fa-truck-fast"></i>
+        <h3>Pickup &amp; delivery</h3>
+        <p>Cash pickup and delivery available on request.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="row" data-buy-low="1540" data-buy-high="1550" data-sell-low="1575" data-sell-high="1580">
-    <div><span class="ccy-code">EUR</span><span class="ccy-name">Euro</span></div>
-    <div class="row-values">
-      <div class="rate-cell"><span class="rate-label">Buy</span><span class="rate-big buy-val">1,540</span><span class="rate-range">1,540–1,550</span></div>
-      <div class="rate-cell"><span class="rate-label">Sell</span><span class="rate-big sell-val">1,575</span><span class="rate-range">1,575–1,580</span></div>
+    <div class="compliance">
+      <span><i class="fa-solid fa-moon"></i>Halal compliant</span>
+      <span><i class="fa-solid fa-file-lines"></i>Terms apply</span>
     </div>
-  </div>
 
-  <div class="row" data-buy-low="1860" data-buy-high="1870" data-sell-low="1880" data-sell-high="1885">
-    <div><span class="ccy-code">GBP</span><span class="ccy-name">Pound Sterling</span></div>
-    <div class="row-values">
-      <div class="rate-cell"><span class="rate-label">Buy</span><span class="rate-big buy-val">1,860</span><span class="rate-range">1,860–1,870</span></div>
-      <div class="rate-cell"><span class="rate-label">Sell</span><span class="rate-big sell-val">1,880</span><span class="rate-range">1,880–1,885</span></div>
+    <div class="address-block">
+      <div class="label">Visit our office</div>
+      <address>Shop F21, Bonny Cantonment Multi Purpose Shopping Complex<br>Victoria Island, Lagos</address>
+      <a class="directions-btn" href="https://www.google.com/maps/search/?api=1&query=Bonny+Cantonment+Multi+Purpose+Shopping+Complex+Victoria+Island+Lagos" target="_blank" rel="noopener">
+        <i class="fa-solid fa-location-arrow"></i> Get directions
+      </a>
     </div>
-  </div>
-
-  <p class="ledger-note">Rates are indicative and subject to change.</p>
-
-  <div class="services">
-    <div class="service">
-      <i class="fa-solid fa-building-columns"></i>
-      <h3>Inflow transactions</h3>
-      <p>Cash deposits accepted at any local bank in Nigeria.</p>
-    </div>
-    <div class="service">
-      <i class="fa-solid fa-truck-fast"></i>
-      <h3>Pickup &amp; delivery</h3>
-      <p>Cash pickup and delivery available on request.</p>
-    </div>
-  </div>
-
-  <div class="compliance">
-    <span><i class="fa-solid fa-moon"></i>Halal compliant</span>
-    <span><i class="fa-solid fa-file-lines"></i>Terms apply</span>
-  </div>
-
-  <div class="address-block">
-    <div class="label">Visit our office</div>
-    <address>Shop F21, Bonny Cantonment Multi Purpose Shopping Complex<br>Victoria Island, Lagos</address>
-    <a class="directions-btn" href="https://www.google.com/maps/search/?api=1&query=Bonny+Cantonment+Multi+Purpose+Shopping+Complex+Victoria+Island+Lagos" target="_blank" rel="noopener">
-      <i class="fa-solid fa-location-arrow"></i> Get directions
-    </a>
   </div>
 
 </div>
@@ -362,25 +314,70 @@
 (function(){
   var rows = document.querySelectorAll('.row');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var chart = document.getElementById('chart');
   function fmt(n){ return n.toLocaleString('en-US'); }
+
+  // Shared scale so bars are comparable across currencies
+  var maxVal = 0;
+  rows.forEach(function(r){ maxVal = Math.max(maxVal, +r.dataset.sellHigh); });
+  maxVal = maxVal * 1.06;
+
+  function barLine(kind, label){
+    return '<div class="bar-line"><span class="bar-tag">'+label+'</span>' +
+           '<div class="track"><div class="fill '+kind+'"></div></div>' +
+           '<span class="bar-val">—</span></div>';
+  }
+
+  var charts = [];
+  rows.forEach(function(row){
+    var g = document.createElement('div');
+    g.className = 'group';
+    g.innerHTML =
+      '<div class="group-head"><strong>'+row.dataset.code+'</strong><span class="spread"></span></div>' +
+      barLine('buy','Buy') + barLine('sell','Sell');
+    chart.appendChild(g);
+    charts.push({
+      buyFill: g.querySelector('.fill.buy'),
+      sellFill: g.querySelector('.fill.sell'),
+      buyVal: g.querySelectorAll('.bar-val')[0],
+      sellVal: g.querySelectorAll('.bar-val')[1],
+      spread: g.querySelector('.spread')
+    });
+  });
+
+  function draw(i, buy, sell){
+    var c = charts[i];
+    c.buyFill.style.width  = (buy  / maxVal * 100).toFixed(1) + '%';
+    c.sellFill.style.width = (sell / maxVal * 100).toFixed(1) + '%';
+    c.buyVal.textContent  = fmt(buy);
+    c.sellVal.textContent = fmt(sell);
+    c.spread.textContent  = 'Spread ₦' + fmt(sell - buy);
+  }
 
   rows.forEach(function(row, i){
     var buyLow = +row.dataset.buyLow, buyHigh = +row.dataset.buyHigh;
     var sellLow = +row.dataset.sellLow, sellHigh = +row.dataset.sellHigh;
     var buyEl = row.querySelector('.buy-val');
     var sellEl = row.querySelector('.sell-val');
+    var cur = { buy: +buyEl.textContent.replace(/,/g,''), sell: +sellEl.textContent.replace(/,/g,'') };
 
-    function tick(el, low, high){
+    function tick(el, key, low, high){
       var v = Math.round(low + Math.random() * (high - low));
+      cur[key] = v;
       el.textContent = fmt(v);
+      draw(i, cur.buy, cur.sell);
       if(!reduce){
         el.classList.add('flip');
         setTimeout(function(){ el.classList.remove('flip'); }, 500);
       }
     }
+
+    // initial paint (slight delay so bars animate in)
+    setTimeout(function(){ draw(i, cur.buy, cur.sell); }, 150);
+
     if(!reduce){
-      setInterval(function(){ tick(buyEl, buyLow, buyHigh); }, 2400 + i * 650);
-      setInterval(function(){ tick(sellEl, sellLow, sellHigh); }, 2900 + i * 600);
+      setInterval(function(){ tick(buyEl, 'buy', buyLow, buyHigh); }, 2400 + i * 650);
+      setInterval(function(){ tick(sellEl, 'sell', sellLow, sellHigh); }, 2900 + i * 600);
     }
   });
 
